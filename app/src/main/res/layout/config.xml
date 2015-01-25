@@ -13,15 +13,31 @@
 	 android:layout_height="wrap_content"
 	 android:text="@string/phone_number_introduction"
 	 />
-	
-	<EditText
-	    android:id="@+id/phone"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="@string/phone_number_hint"
-	    android:inputType="phone" />
-	
-	<TextView
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
+
+            <EditText
+            android:id="@+id/phone"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_number_hint"
+            android:inputType="phone"
+                android:layout_weight="0.83" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_contact_string"
+                android:id="@+id/button" />
+        </LinearLayout>
+
+        <TextView
 	 android:layout_width="fill_parent"
 	 android:layout_height="wrap_content"
 	 android:text="@string/messages_description"

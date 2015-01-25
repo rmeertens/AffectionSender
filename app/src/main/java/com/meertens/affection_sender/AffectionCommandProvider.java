@@ -17,7 +17,7 @@ public class AffectionCommandProvider extends AppWidgetProvider {
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_demo);
 		remoteViews.setOnClickPendingIntent(R.id.widget_button, buildButtonPendingIntent(context));
 		remoteViews.setOnClickPendingIntent(R.id.widget_image, buildImagePendingIntent(context));
-    
+
 		pushWidgetUpdate(context, remoteViews);
 	}
 	
