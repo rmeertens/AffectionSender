@@ -1,18 +1,28 @@
 package com.meertens.affection_sender;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 public class HelloWidgetConfig extends Activity {
@@ -38,15 +48,30 @@ public class HelloWidgetConfig extends Activity {
         configConfirmButton = (Button) findViewById(R.id.contactbutton);
         configConfirmButton.setOnClickListener(configContactOnClickListener);
 
+
+        //TableLayout tl=(TableLayout)findViewById(R.id.tablelayout);
+
+        ListView listView = (ListView) findViewById(R.id.tablelayout);
+
+
+
 		// Read the text from the file. 
 		try {
 			String[] messagesAr = AffectionInOutOperations.readFromFile(FILENAME).split("\n");
 			String totalString = "";
+            ArrayList<String> allMessages = new ArrayList<String>();
 			for (String singleMessage : messagesAr)
 			{
 				totalString+= singleMessage + "\n";
-			}
-			EditText text = (EditText) findViewById(R.id.editText1);
+                allMessages.add(singleMessage);
+            }
+            Log.i("element ", allMessages.size()+"");
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, allMessages);
+            listView.setAdapter(adapter);
+
+            EditText text = (EditText) findViewById(R.id.editText1);
 			text.setText(totalString.toString().substring(0, totalString.length()-1)); // Remove the last newline
 		} catch (FileNotFoundException e1) {
 			EditText text = (EditText) findViewById(R.id.editText1);
@@ -78,7 +103,7 @@ public class HelloWidgetConfig extends Activity {
 	         //finish();
 	     }
 
-	}	
+	}
 
 	// The on click listener for the return to homescreen button.
 	private Button.OnClickListener configExitOnClickListener = new Button.OnClickListener() {
@@ -139,8 +164,7 @@ public class HelloWidgetConfig extends Activity {
                 // CAUTION: The query() method should be called from a separate thread to avoid blocking
                 // your app's UI thread. (For simplicity of the sample, this code doesn't do that.)
                 // Consider using CursorLoader to perform the query.
-                Cursor cursor = getContentResolver()
-                        .query(contactUri, projection, null, null, null);
+                Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null);
                 cursor.moveToFirst();
 
                 // Retrieve the phone number from the NUMBER column

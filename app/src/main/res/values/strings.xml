@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Affection sender</string>
-    
-    
+
+    <string name="add_message">Add a message</string>
     <string name="phone_number_hint">Phone number</string>
     <string name="phone_number_introduction">Add the phone number of your love:</string>
     <string name="love_button">Love!</string>
