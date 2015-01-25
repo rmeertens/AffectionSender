@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Affectie verstuurder</string>
+	<string name="phone_number_hint">Telefoonnummer</string>
+	<string name="phone_number_introduction">Voeg het nummer van je geliefde toe</string>
+	<string name="love_button">Liefde!</string>
+</resources>

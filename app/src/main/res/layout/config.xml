@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+	<LinearLayout 
+	 android:orientation="vertical"
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 >
+	<TextView
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:text="@string/phone_number_introduction"
+	 />
+	
+	<EditText
+	    android:id="@+id/phone"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/phone_number_hint"
+	    android:inputType="phone" />
+	
+	<TextView
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:text="@string/messages_description"
+	 />
+	
+	<EditText
+	    android:id="@+id/editText1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:ems="10"
+	    android:inputType="textMultiLine" >
+	
+	    <requestFocus />
+	</EditText>
+	
+	
+	<Button
+	 android:id="@+id/exitconfig"
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:text="@string/exit_configuration_text"
+	 />
+	</LinearLayout>
+</ScrollView>

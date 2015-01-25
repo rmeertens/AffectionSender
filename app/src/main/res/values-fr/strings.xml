@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Amour envoyer</string>
+	<string name="phone_number_hint">Numéro de téléphone</string>
+	<string name="phone_number_introduction">Ajoute le numéro de téléphone de votre amour:</string>
+	<string name="love_button">Amour!</string>
+</resources>
