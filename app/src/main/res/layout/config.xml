@@ -42,18 +42,24 @@
 	 android:layout_height="wrap_content"
 	 android:text="@string/messages_description"
 	 />
-	
+
 	<EditText
 	    android:id="@+id/editText1"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:ems="10"
 	    android:inputType="textMultiLine" >
-	
+
 	    <requestFocus />
 	</EditText>
-	
-	
+        <TableLayout
+            android:id="@+id/messageTable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:stretchColumns="1">
+        </TableLayout>
+
 	<Button
 	 android:id="@+id/exitconfig"
 	 android:layout_width="fill_parent"
