@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,11 @@ public class HelloWidgetConfig extends Activity {
 		// Add on click listener to the confirmation button.
 		configConfirmButton = (Button) findViewById(R.id.exitconfig);
 		configConfirmButton.setOnClickListener(configExitOnClickListener);
-		
+
+        // Add on click listener to the contact select button
+        configConfirmButton = (Button) findViewById(R.id.contactbutton);
+        configConfirmButton.setOnClickListener(configContactOnClickListener);
+
 		// Read the text from the file. 
 		try {
 			String[] messagesAr = AffectionInOutOperations.readFromFile(FILENAME).split("\n");
@@ -90,4 +95,17 @@ public class HelloWidgetConfig extends Activity {
 			finish();
 		}
 	};
+
+    // The on click listener for the contact button.
+    private Button.OnClickListener configContactOnClickListener = new Button.OnClickListener() {
+        private static final int CONTACT_PICKER_RESULT = 1001;
+
+        @Override
+        public void onClick(View arg0) {
+            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
+                    Contacts.CONTENT_URI);
+            startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+
+        }
+    };
 }
