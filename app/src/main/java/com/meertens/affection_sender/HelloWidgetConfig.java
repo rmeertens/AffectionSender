@@ -1,29 +1,24 @@
 package com.meertens.affection_sender;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class HelloWidgetConfig extends Activity {
 
@@ -58,14 +53,16 @@ public class HelloWidgetConfig extends Activity {
 		// Read the text from the file. 
 		try {
 			String[] messagesAr = AffectionInOutOperations.readFromFile(FILENAME).split("\n");
+            TableLayout messageTable = (TableLayout) findViewById(R.id.messageTable);
 			String totalString = "";
+
             ArrayList<String> allMessages = new ArrayList<String>();
 			for (String singleMessage : messagesAr)
 			{
 				totalString+= singleMessage + "\n";
                 allMessages.add(singleMessage);
             }
-            Log.i("element ", allMessages.size()+"");
+            Log.i("element ", allMessages.size() + "");
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, allMessages);
@@ -73,6 +70,19 @@ public class HelloWidgetConfig extends Activity {
 
             EditText text = (EditText) findViewById(R.id.editText1);
 			text.setText(totalString.toString().substring(0, totalString.length()-1)); // Remove the last newline
+
+            final ViewGroup.LayoutParams editTextLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+			for (String singleMessage : messagesAr)
+			{
+                EditText message = new EditText(this);
+                message.setLayoutParams(editTextLayoutParams);
+                message.setText(singleMessage);
+                messageTable.addView(message);
+				//totalString+= singleMessage + "\n";
+			}
+			//EditText text = (EditText) findViewById(R.id.editText1);
+			//text.setText(totalString.toString().substring(0, totalString.length()-1)); // Remove the last newline
+
 		} catch (FileNotFoundException e1) {
 			EditText text = (EditText) findViewById(R.id.editText1);
 			text.setText("");
@@ -111,7 +121,14 @@ public class HelloWidgetConfig extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			// Get the text from the text field with all love strings
-			String kleffeString = ((EditText) findViewById(R.id.editText1)).getText().toString();
+            TableLayout messageTable = (TableLayout) findViewById(R.id.messageTable);
+
+            String kleffeString = "";
+            for(int i = 0; i < messageTable.getChildCount(); i++)
+            {
+                kleffeString += ((EditText) messageTable.getChildAt(i)).getText().toString();
+            }
+            //kleffeString = ((EditText) findViewById(R.id.editText1)).getText().toString();
 			String phoneString = ((EditText)findViewById(R.id.phone)).getText().toString();
 
 			// Write the found strings to the memory

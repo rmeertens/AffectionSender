@@ -1,73 +1,84 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
+android:id="@+id/ScrollView01"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical">
+
+
+<TextView
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:text="@string/phone_number_introduction"
+    />
 
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/phone_number_introduction"
-        />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:weightSum="1">
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone_number_hint"
-            android:inputType="phone"
-            android:layout_weight="0.83" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/select_contact_string"
-            android:id="@+id/contactbutton" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/messages_description"
-        />
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:weightSum="1">
 
     <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
+        android:id="@+id/phone"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
-
+        android:hint="@string/phone_number_hint"
+        android:inputType="phone"
+        android:layout_weight="0.83" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_message" />
-    <Button
-        android:id="@+id/exitconfig"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/exit_configuration_text"
-        />
-
-    <ListView
-        android:id="@+id/tablelayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
-
+        android:text="@string/select_contact_string"
+        android:id="@+id/contactbutton" />
 </LinearLayout>
+
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/messages_description"
+    />
+
+<EditText
+    android:id="@+id/editText1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="textMultiLine" >
+
+    <requestFocus />
+</EditText>
+
+
+<Button
+    android:id="@+id/button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/add_message" />
+<Button
+    android:id="@+id/exitconfig"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/exit_configuration_text"
+    />
+
+<ListView
+    android:id="@+id/tablelayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</ListView>
+
+
+    <TableLayout
+        android:id="@+id/messageTable"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:stretchColumns="1">
+    </TableLayout>
+</LinearLayout>
+
+
