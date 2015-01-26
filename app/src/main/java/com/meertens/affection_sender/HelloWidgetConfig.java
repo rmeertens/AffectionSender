@@ -71,12 +71,7 @@ public class HelloWidgetConfig extends Activity {
             }
         });
 
-
-        //TableLayout tl=(TableLayout)findViewById(R.id.tablelayout);
-
         ListView listView = (ListView) findViewById(R.id.tablelayout);
-
-
 
 		// Read the text from the file. 
 		try {
@@ -89,11 +84,11 @@ public class HelloWidgetConfig extends Activity {
             }
             Log.i("element ", allMessages.size() + "");
 
-            adapter = new LoveAdapter(this,allMessages, this);
+            adapter = new LoveAdapter(this,allMessages);
             listView.setAdapter(adapter);
 
 		} catch (FileNotFoundException e1) {
-            adapter = new LoveAdapter(this,new ArrayList<String>(), this);
+            adapter = new LoveAdapter(this,new ArrayList<String>());
             listView.setAdapter(adapter);
 		}
 	    
@@ -156,13 +151,10 @@ public class HelloWidgetConfig extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("OnResult","Got result");
         // Check which request we're responding to
         if (requestCode == CONTACT_PICKER_RESULT) {
-            Log.i("OnResult","Got result 2");
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Log.i("OnResult","Got result 3");
                 // The user picked a contact.
                 // The Intent's data Uri identifies which contact was selected.
 
