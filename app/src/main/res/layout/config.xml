@@ -65,12 +65,12 @@ android:orientation="vertical">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="318dp">
+        android:layout_height="109dp">
 
         <ListView
         android:id="@+id/tablelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="131dp"
             android:layout_gravity="top">
 
     </ListView>
@@ -82,6 +82,14 @@ android:orientation="vertical">
     android:layout_height="76dp"
     android:text="@string/exit_configuration_text"
     />
+
+
+    <fragment
+        android:id="@+id/adFragment"
+        android:name="com.meertens.affection_sender.HelloWidgetConfig$AdFragment"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
 
 
 </LinearLayout>
