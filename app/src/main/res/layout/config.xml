@@ -41,44 +41,49 @@ android:orientation="vertical">
     android:text="@string/messages_description"
     />
 
-<EditText
-    android:id="@+id/editText1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="textMultiLine" >
 
-    <requestFocus />
-</EditText>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_message_field"
+            android:layout_weight="0.85" />
 
-<Button
-    android:id="@+id/button"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/add_message" />
-<Button
+        <Button
+        android:id="@+id/add_message_button"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_message" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="318dp">
+
+        <ListView
+        android:id="@+id/tablelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_gravity="top">
+
+    </ListView>
+    </LinearLayout>
+
+    <Button
     android:id="@+id/exitconfig"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="76dp"
     android:text="@string/exit_configuration_text"
     />
 
-<ListView
-    android:id="@+id/tablelayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-</ListView>
-
-
-    <TableLayout
-        android:id="@+id/messageTable"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:stretchColumns="1">
-    </TableLayout>
 </LinearLayout>
 
 

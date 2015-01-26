@@ -14,6 +14,8 @@ import android.telephony.SmsManager;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.meertens.affection_sender.R;
+
 public class AffectionIntentReceiver extends BroadcastReceiver {
 	private static final String FILENAME = "klef.txt";
 	

@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.meertens.affection_sender.R;
+
 public class AffectionCommandProvider extends AppWidgetProvider {
 
 	@Override

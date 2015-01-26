@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
+import com.meertens.affection_sender.R;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -27,8 +29,24 @@ public class HelloWidgetConfig extends Activity {
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private static final String FILENAME = "klef.txt";
     private static final int CONTACT_PICKER_RESULT = 1337;
+    ArrayAdapter<String> adapter;
 
-	@Override
+    public void saveToFile() {
+        String kleffeString = "";
+        for(int i=0 ; i<adapter.getCount() ; i++){
+            String obj = adapter.getItem(i);
+            kleffeString+= obj+"\n";
+
+        }
+
+        String phoneString = ((EditText)findViewById(R.id.phone)).getText().toString();
+
+        // Write the found strings to the memory
+        AffectionInOutOperations.writeToFile(HelloWidgetConfig.FILENAME, kleffeString);
+        AffectionInOutOperations.writeToFile("number.txt", phoneString);
+    }
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// Initialization code
 		super.onCreate(savedInstanceState);
@@ -43,6 +61,16 @@ public class HelloWidgetConfig extends Activity {
         configConfirmButton = (Button) findViewById(R.id.contactbutton);
         configConfirmButton.setOnClickListener(configContactOnClickListener);
 
+        Button addMessage = (Button) findViewById(R.id.add_message_button);
+        addMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newMessage = ((EditText)findViewById(R.id.new_message_field)).getText().toString();
+                Log.i("Adding new message",newMessage);
+                adapter.add(newMessage);
+            }
+        });
+
 
         //TableLayout tl=(TableLayout)findViewById(R.id.tablelayout);
 
@@ -53,39 +81,20 @@ public class HelloWidgetConfig extends Activity {
 		// Read the text from the file. 
 		try {
 			String[] messagesAr = AffectionInOutOperations.readFromFile(FILENAME).split("\n");
-            TableLayout messageTable = (TableLayout) findViewById(R.id.messageTable);
-			String totalString = "";
 
             ArrayList<String> allMessages = new ArrayList<String>();
 			for (String singleMessage : messagesAr)
 			{
-				totalString+= singleMessage + "\n";
                 allMessages.add(singleMessage);
             }
             Log.i("element ", allMessages.size() + "");
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, allMessages);
+            adapter = new LoveAdapter(this,allMessages, this);
             listView.setAdapter(adapter);
 
-            EditText text = (EditText) findViewById(R.id.editText1);
-			text.setText(totalString.toString().substring(0, totalString.length()-1)); // Remove the last newline
-
-            final ViewGroup.LayoutParams editTextLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-			for (String singleMessage : messagesAr)
-			{
-                EditText message = new EditText(this);
-                message.setLayoutParams(editTextLayoutParams);
-                message.setText(singleMessage);
-                messageTable.addView(message);
-				//totalString+= singleMessage + "\n";
-			}
-			//EditText text = (EditText) findViewById(R.id.editText1);
-			//text.setText(totalString.toString().substring(0, totalString.length()-1)); // Remove the last newline
-
 		} catch (FileNotFoundException e1) {
-			EditText text = (EditText) findViewById(R.id.editText1);
-			text.setText("");
+            adapter = new LoveAdapter(this,new ArrayList<String>(), this);
+            listView.setAdapter(adapter);
 		}
 	    
 	    // Read the number from the file
@@ -94,7 +103,7 @@ public class HelloWidgetConfig extends Activity {
 			EditText number = (EditText) findViewById(R.id.phone);
 		    number.setText(numberString.toString());
 		} catch (FileNotFoundException e) {
-			EditText text = (EditText) findViewById(R.id.editText1);
+			EditText text = (EditText) findViewById(R.id.phone);
 			text.setText("");
 		}
 	    
@@ -121,19 +130,7 @@ public class HelloWidgetConfig extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			// Get the text from the text field with all love strings
-            TableLayout messageTable = (TableLayout) findViewById(R.id.messageTable);
-
-            String kleffeString = "";
-            for(int i = 0; i < messageTable.getChildCount(); i++)
-            {
-                kleffeString += ((EditText) messageTable.getChildAt(i)).getText().toString();
-            }
-            //kleffeString = ((EditText) findViewById(R.id.editText1)).getText().toString();
-			String phoneString = ((EditText)findViewById(R.id.phone)).getText().toString();
-
-			// Write the found strings to the memory
-			AffectionInOutOperations.writeToFile(HelloWidgetConfig.FILENAME, kleffeString);
-			AffectionInOutOperations.writeToFile("number.txt", phoneString);
+            saveToFile();
 			
 			// Return to the home screen
 			Intent resultValue = new Intent();
@@ -141,7 +138,8 @@ public class HelloWidgetConfig extends Activity {
 			setResult(RESULT_OK, resultValue);
 			finish();
 		}
-	};
+
+    };
 
     // The on click listener for the contact button.
     private Button.OnClickListener configContactOnClickListener = new Button.OnClickListener() {
@@ -153,9 +151,6 @@ public class HelloWidgetConfig extends Activity {
             pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
 
             startActivityForResult(pickContactIntent, CONTACT_PICKER_RESULT);
-
-
-
         }
     };
 
