@@ -191,23 +191,6 @@ public class HelloWidgetConfig extends Activity {
         }
     }
 
-
-    /**
-     * A placeholder fragment containing a simple view. This fragment
-     * would include your content.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_ad, container, false);
-            return rootView;
-        }
-    }
     /**
      * This class makes the ad request and loads the ad.
      */
