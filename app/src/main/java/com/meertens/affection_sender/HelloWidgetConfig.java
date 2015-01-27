@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class HelloWidgetConfig extends Activity {
 
-	private Button configConfirmButton;
+
 	
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 	private static final String FILENAME = "klef.txt";
@@ -58,19 +59,23 @@ public class HelloWidgetConfig extends Activity {
 		setContentView(R.layout.config);
 		
 		// Add on click listener to the confirmation button.
-		configConfirmButton = (Button) findViewById(R.id.exitconfig);
-		configConfirmButton.setOnClickListener(configExitOnClickListener);
+        Button exitConfigScreenButton = (Button) findViewById(R.id.exitconfig);
+        exitConfigScreenButton.setOnClickListener(configExitOnClickListener);
 
         // Add on click listener to the contact select button
-        configConfirmButton = (Button) findViewById(R.id.contactbutton);
-        configConfirmButton.setOnClickListener(configContactOnClickListener);
+        ImageButton contactButton= (ImageButton) findViewById(R.id.contactbutton);
+        contactButton.setOnClickListener(configContactOnClickListener);
 
-        Button addMessage = (Button) findViewById(R.id.add_message_button);
+        ImageButton addMessage = (ImageButton) findViewById(R.id.add_message_button);
         addMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newMessage = ((EditText)findViewById(R.id.new_message_field)).getText().toString();
-                Log.i("Adding new message",newMessage);
+                // Get the message from the field, and clear this field
+                EditText newLoveMessageField = (EditText)findViewById(R.id.new_message_field);
+                String newMessage = newLoveMessageField.getText().toString();
+                newLoveMessageField.setText("");
+
+                // Add the message to the overview with messages
                 adapter.add(newMessage);
             }
         });
@@ -79,15 +84,15 @@ public class HelloWidgetConfig extends Activity {
 
 		// Read the text from the file. 
 		try {
+            // All all messages to an arraylist
 			String[] messagesAr = AffectionInOutOperations.readFromFile(FILENAME).split("\n");
-
             ArrayList<String> allMessages = new ArrayList<String>();
 			for (String singleMessage : messagesAr)
 			{
                 allMessages.add(singleMessage);
             }
-            Log.i("element ", allMessages.size() + "");
 
+            // Create the adapter and add it to the listview
             adapter = new LoveAdapter(this,allMessages);
             listView.setAdapter(adapter);
 

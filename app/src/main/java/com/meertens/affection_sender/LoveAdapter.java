@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class LoveAdapter extends ArrayAdapter<String> {
 
         // Get the layout elements that are used in this view
         TextView loveText = (TextView) convertView.findViewById(R.id.love_edit_text);
-        Button removeButton = (Button) convertView.findViewById(R.id.remove_love_button);
+        ImageButton removeButton = (ImageButton) convertView.findViewById(R.id.remove_love_button);
 
         // Set the text and add a listener to the button
         loveText.setText(thisLove);

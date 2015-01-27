@@ -10,11 +10,12 @@
         android:id="@+id/love_edit_text"
         android:layout_weight="1" />
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/remove_text"
         android:id="@+id/remove_love_button"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:src="@drawable/ic_action_remove" />
 </LinearLayout>

@@ -34,12 +34,13 @@ android:orientation="vertical">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_contact_string"
-        android:id="@+id/contactbutton" />
+        android:id="@+id/contactbutton"
+        android:src="@drawable/ic_action_person" />
 
 </LinearLayout>
 
@@ -70,11 +71,12 @@ android:orientation="vertical">
             android:layout_weight="0.85"
             android:hint="@string/new_love_hint" />
 
-        <Button
+        <ImageButton
         android:id="@+id/add_message_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_message" />
+        android:text="@string/add_message"
+            android:src="@drawable/ic_action_new" />
 
     </LinearLayout>
 
