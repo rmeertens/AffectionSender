@@ -1,5 +1,5 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/ScrollView01"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
@@ -10,14 +10,18 @@ android:orientation="vertical">
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="@string/phone_number_introduction"
-    />
+    android:id="@+id/textView" />
 
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/linearLayout"
+    android:layout_below="@+id/textView"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 
     <EditText
         android:id="@+id/phone"
@@ -25,7 +29,10 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         android:hint="@string/phone_number_hint"
         android:inputType="phone"
-        android:layout_weight="0.83" />
+        android:layout_weight="0.83"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -33,65 +40,74 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         android:text="@string/select_contact_string"
         android:id="@+id/contactbutton" />
+
 </LinearLayout>
 
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="@string/messages_description"
-    />
+    android:layout_below="@+id/linearLayout"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/textView2" />
 
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/new_message_field"
-            android:layout_weight="0.85" />
+            android:layout_weight="0.85"
+            android:hint="@string/new_love_hint" />
 
         <Button
         android:id="@+id/add_message_button"
-        android:layout_width="122dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_message" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="109dp">
+    <ListView
+    android:id="@+id/tablelayout"
+    android:layout_width="match_parent"
+    android:layout_height="131dp"
+        android:layout_gravity="top"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_above="@+id/exitconfig">
 
-        <ListView
-        android:id="@+id/tablelayout"
-        android:layout_width="match_parent"
-        android:layout_height="131dp"
-            android:layout_gravity="top">
-
-    </ListView>
-    </LinearLayout>
+</ListView>
 
     <Button
     android:id="@+id/exitconfig"
     android:layout_width="fill_parent"
-    android:layout_height="76dp"
+    android:layout_height="50dp"
     android:text="@string/exit_configuration_text"
-    />
+        android:layout_above="@+id/adFragment"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <fragment
         android:id="@+id/adFragment"
         android:name="com.meertens.affection_sender.HelloWidgetConfig$AdFragment"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true" />
 
 
-</LinearLayout>
+</RelativeLayout>
 
 

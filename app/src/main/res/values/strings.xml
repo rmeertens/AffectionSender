@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Affection sender</string>
     <string name="remove_text">Remove</string>
-    <string name="add_message">Add a message</string>
+    <string name="add_message">Add</string>
+    <string name="new_love_hint">New lovely message</string>
     <string name="phone_number_hint">Phone number</string>
     <string name="phone_number_introduction">Add the phone number of your love:</string>
     <string name="love_button">Love!</string>
-    <string name="messages_description">Add all sweet things you want to send separated by new lines:</string>
+    <string name="messages_description">Add all sweet things you want to send:</string>
     <string name="exit_configuration_text">Return to home screen</string>
     <string name="image_description">The heart</string>
     <string name="select_contact_string">Contact</string>

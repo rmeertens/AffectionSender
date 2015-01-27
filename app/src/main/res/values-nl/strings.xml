@@ -1,7 +1,13 @@
 <resources>
-
     <string name="app_name">Affectie verstuurder</string>
 	<string name="phone_number_hint">Telefoonnummer</string>
-	<string name="phone_number_introduction">Voeg het nummer van je geliefde toe</string>
+	<string name="phone_number_introduction">Voeg het nummer van je geliefde toe:</string>
 	<string name="love_button">Liefde!</string>
+    <string name="remove_text">Verwijder</string>
+    <string name="add_message">Voeg toe</string>
+    <string name="new_love_hint">Nieuw bericht</string>
+    <string name="messages_description">Voeg alle lieve dingen toe die je wilt versturen:</string>
+    <string name="exit_configuration_text">Sluit app af</string>
+    <string name="image_description">Het hartje</string>
+    <string name="select_contact_string">Contact</string>
 </resources>
