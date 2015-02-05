@@ -1,12 +1,15 @@
 package com.meertens.affection_sender;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
+import android.appwidget.AppWidgetHost;
+import android.support.v4.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -19,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -27,7 +31,7 @@ import com.meertens.affection_sender.R;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class HelloWidgetConfig extends Activity {
+public class HelloWidgetConfig extends android.support.v4.app.FragmentActivity {
 
 
 	
@@ -35,6 +39,13 @@ public class HelloWidgetConfig extends Activity {
 	private static final String FILENAME = "klef.txt";
     private static final int CONTACT_PICKER_RESULT = 1337;
     ArrayAdapter<String> adapter;
+
+
+    private static final int MY_REQUEST_APPWIDGET = 1;
+    private static final int MY_CREATE_APPWIDGET = 2;
+    private static final int HOST_ID = 1024 ;
+    private AppWidgetHost  mAppWidgetHost = null ;
+    AppWidgetManager appWidgetManager = null;
 
     public void saveToFile() {
         String kleffeString = "";
@@ -61,6 +72,21 @@ public class HelloWidgetConfig extends Activity {
 		// Add on click listener to the confirmation button.
         Button exitConfigScreenButton = (Button) findViewById(R.id.exitconfig);
         exitConfigScreenButton.setOnClickListener(configExitOnClickListener);
+
+
+
+
+/*
+        Button placeAsWidgetButton= (Button) findViewById(R.id.place_as_widget_button);
+        placeAsWidgetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+                //pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,);
+                //startActivityForResult(pickIntent, 20);
+
+            }
+        });*/
 
         // Add on click listener to the contact select button
         ImageButton contactButton= (ImageButton) findViewById(R.id.contactbutton);
@@ -181,11 +207,16 @@ public class HelloWidgetConfig extends Activity {
                 cursor.moveToFirst();
 
                 // Retrieve the phone number from the NUMBER column
-                int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                String number = cursor.getString(column);
-                Log.i("Selected cntact", number);
-                AffectionInOutOperations.writeToFile("number.txt", number);
-                ((EditText)findViewById(R.id.phone)).setText(number);
+                if(cursor.getCount()==0){
+                    Toast toast = Toast.makeText(this, "Phonenumber unknown", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    String number = cursor.getString(column);
+                    AffectionInOutOperations.writeToFile("number.txt", number);
+                    ((EditText) findViewById(R.id.phone)).setText(number);
+                }
 
             }
         }
@@ -207,6 +238,7 @@ public class HelloWidgetConfig extends Activity {
 
             // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
             // values/strings.xml.
+            //getView().findViewById(R.id.adFragment);
             mAdView = (AdView) getView().findViewById(R.id.adView);
 
             // Create an ad request. Check logcat output for the hashed device ID to
@@ -227,6 +259,7 @@ public class HelloWidgetConfig extends Activity {
         }
 
         /** Called when leaving the activity */
+
         @Override
         public void onPause() {
             if (mAdView != null) {

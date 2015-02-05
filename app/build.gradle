@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.meertens.affection_sender"
-        minSdkVersion 13
+        minSdkVersion 9
         targetSdkVersion 21
     }
 
